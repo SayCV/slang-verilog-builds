@@ -29,11 +29,14 @@ jobs:
       run: cmake --build build/${{ matrix.preset }} -j8
     - name: Run tests
       run: ctest --test-dir build/${{ matrix.preset }} --output-on-failure --no-tests=error -j8
+    - name: Install
+      run: cmake --install build/${{ matrix.preset }} --strip --prefix install/${{ matrix.preset }}
+
     - name: Upload
       uses: actions/upload-artifact@v3
       with:
         name: 'archives'
-        path: build/${{ matrix.preset }}
+        path: install/${{ matrix.preset }}
 
 
   release:
@@ -46,6 +49,8 @@ jobs:
       with:
         name: 'archives'
         path: ./
+    - name: Display structure of downloaded files
+      run: ls -R
 
     - name: Upload to Release
       id: upload_to_release
