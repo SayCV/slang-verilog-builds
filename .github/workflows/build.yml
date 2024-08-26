@@ -33,7 +33,7 @@ jobs:
       run: cmake --install build/${{ matrix.preset }} --strip --prefix install/${{ matrix.preset }}
 
     - name: Zip artifact for deployment
-      run: zip slang-verilog-${{ matrix.preset }}.zip install/${{ matrix.preset }}/* -r
+      run: 7z a slang-verilog-${{ matrix.preset }}.zip install/${{ matrix.preset }}
 
     - name: Upload
       uses: actions/upload-artifact@v3
