@@ -32,11 +32,14 @@ jobs:
     - name: Install
       run: cmake --install build/${{ matrix.preset }} --strip --prefix install/${{ matrix.preset }}
 
+    - name: Zip artifact for deployment
+      run: zip slang-verilog-${{ matrix.preset }}.zip install/${{ matrix.preset }}/* -r
+
     - name: Upload
       uses: actions/upload-artifact@v3
       with:
         name: 'archives'
-        path: install/${{ matrix.preset }}
+        path: slang-verilog-${{ matrix.preset }}.zip
 
 
   release:
@@ -56,4 +59,4 @@ jobs:
       id: upload_to_release
       uses: softprops/action-gh-release@v1
       with:
-        files: "*.7z"
+        files: "*.zip"
