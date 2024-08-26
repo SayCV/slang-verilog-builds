@@ -36,10 +36,9 @@ jobs:
 
     - name: Zip artifact for deployment
       run: |
-        if: matrix.os == 'windows-latest' {
+        if ($env:RUNNER_OS -eq "Windows") {
           7z a slang-verilog-${{ matrix.preset }}.zip install/${{ matrix.preset }}
-        }
-        else {
+        } else {
           zip -r slang-verilog-${{ matrix.preset }}.zip install/${{ matrix.preset }}
         }
 
