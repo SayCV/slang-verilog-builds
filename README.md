@@ -1,2 +1,2 @@
-# slang-verilog-binaries
-slang-verilog-binaries
+# slang-verilog-builds
+slang-verilog-builds
